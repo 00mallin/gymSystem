@@ -1,7 +1,8 @@
 ﻿namespace Logic;
-public class Person
+public class Member
 {
     public int Id { get; set; }
+    public string PersonalNumber { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Address { get; set; }
@@ -9,5 +10,5 @@ public class Person
     public bool IsStaff { get; set; }
     public int CardId { get; set; }
 
-    public Person() { }
+    public Member() { }
 }
