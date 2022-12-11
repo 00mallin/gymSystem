@@ -1,0 +1,12 @@
+namespace Logic;
+
+public class Membership
+{
+    public int Id { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
+    public int MemberShipTypeId { get; set; }
+    public int GymId { get; set; }
+
+    public Membership() { }
+}
