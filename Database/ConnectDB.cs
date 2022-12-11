@@ -1,5 +1,4 @@
 using MySqlConnector;
-using System.Configuration;
 
 namespace Database;
 
@@ -8,8 +7,8 @@ public class ConnectDB
     public MySqlConnection Connection { get; private set; }
     public ConnectDB()
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["sqlCon"].ConnectionString;
-        Connection = new MySqlConnection(connectionString);
+        string connectionString = "Server=familjenlindh.se;Database=gym_system;Uid=gym;Pwd=123gym123";
+        Connection = new(connectionString);
 
         try
         {
