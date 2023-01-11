@@ -17,6 +17,11 @@ public class GymDB
         throw new NotImplementedException();
     }
 
+    public static Gym Get(int id)
+    {
+        return db.Connection.QuerySingleOrDefault<Gym>($"SELECT * FROM gym WHERE id = {id}");
+    }
+
     public static Dictionary<Gym, int> GetAll()
     {
         Dictionary<Gym, int> dictonaryGym = new();
