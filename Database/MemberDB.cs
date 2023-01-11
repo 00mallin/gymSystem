@@ -22,10 +22,11 @@ public class MemberDB
             };
             id = db.Connection.QuerySingle<int>("INSERT INTO member(personal_number, first_name, last_name, address, phone, is_staff, card_id) VALUES (@PersonalNumber, @FirstName, @LastName, @Address, @Phone, 0, NULL); SELECT LAST_INSERT_ID()", paramaters);
         }
-        catch{ return false; }
+        catch{ return false; } // Duplicate entry
 
         int cardId = CardDB.Add();
 
+        // Connect the created card to new Member
         if(cardId > 0)
         {
             var paramaters = new {
@@ -37,5 +38,11 @@ public class MemberDB
             return true;
         }
         return false;
+    }
+
+    public static Member Get(string personalNumber)
+    {
+        var paramaters = new { PersonalNumber = personalNumber};
+        return db.Connection.QuerySingleOrDefault<Member>("SELECT id, personal_number AS PersonalNumber, first_name AS FirstName, last_name AS LastName, address, phone, is_staff AS IsStaff, card_id AS CardId FROM member WHERE personal_number = @PersonalNumber");
     }
 }
