@@ -7,7 +7,6 @@ public class MembersSubUI
 {
     public static void Show(int gymId, Member member)
     {
-        Console.WriteLine(member.FirstName);
         Menu subMenu = new();
 
         subMenu.AddMenuItem("Edit Membership", () => EditMembership(gymId, member));
@@ -15,13 +14,13 @@ public class MembersSubUI
         // subMenu.AddMenuItem("Remove Member", () => RemoveMember());
 
 
-        subMenu.Show();
+        subMenu.Show($"{member.FirstName} {member.LastName}");
     }
 
     private static void EditMembership(int gymId, Member member)
     {
         Console.Clear();
-        List<MembershipType> memberships = MembershipDB.GetAll();
+        List<MembershipType> memberships = MembershipDB.GetAllTypes();
 
         for (int i = 0; i < memberships.Count; i++)
         {
@@ -32,8 +31,9 @@ public class MembersSubUI
 
         MembershipType membershipType = memberships[selection-1];
 
-        if(MembershipDB.Add(member, membershipType, gymId))
+        if(MembershipDB.AddOrEdit(member, membershipType, gymId))
         {
+            Console.Clear();
             Console.Write("Membership succesfully started!...");
             Console.ReadKey();
         }

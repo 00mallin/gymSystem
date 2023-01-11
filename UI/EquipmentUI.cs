@@ -10,6 +10,6 @@ public class EquipmentUI
         subMenu.AddMenuItem("Add Equipment", null);
         subMenu.AddMenuItem("Remove Equipment", null);
 
-        subMenu.Show();
+        subMenu.Show("");
     }
 }

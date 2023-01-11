@@ -12,7 +12,7 @@ public class MembersUI
         subMenu.AddMenuItem("New Member", () => NewMember());
         subMenu.AddMenuItem("Search Member", () => SearchMember(gymId));
 
-        subMenu.Show();
+        subMenu.Show("Members menu");
     }
 
     private static void NewMember()

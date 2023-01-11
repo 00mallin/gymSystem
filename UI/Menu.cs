@@ -9,13 +9,13 @@ public class Menu
     int currentMenuIndex = 0;
     List<MenuItem> menuItems = new();
 
-    public void Show()
+    public void Show(string title)
     {
         while (true)
         {
             Console.CursorVisible = false;
 
-            RenderMenu();
+            RenderMenu(title);
 
             ConsoleKey key = Console.ReadKey(true).Key;
             if (key == upKey) SetCurrentMenuIndex(-1);
@@ -35,9 +35,10 @@ public class Menu
         menuItems.Add(newMenuItem);
     }
 
-    void RenderMenu()
+    void RenderMenu(string title)
     {
         Console.Clear();
+        Console.WriteLine(title + Environment.NewLine);
         menuItems.ForEach((item) => item.Render(menuItems.IndexOf(item) == currentMenuIndex));
         Console.ResetColor();
     }

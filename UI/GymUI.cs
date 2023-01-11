@@ -1,3 +1,6 @@
+using Database;
+using Logic;
+
 namespace UI;
 public class GymUI
 {
@@ -8,6 +11,6 @@ public class GymUI
         subMenu.AddMenuItem("Members", () => MembersUI.Show(gymId));
         subMenu.AddMenuItem("Equipment", () => EquipmentUI.Show());
 
-        subMenu.Show();
+        subMenu.Show($"{GymDB.Get(gymId).Name}");
     }
 }
