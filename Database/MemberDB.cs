@@ -43,6 +43,6 @@ public class MemberDB
     public static Member Get(string personalNumber)
     {
         var paramaters = new { PersonalNumber = personalNumber};
-        return db.Connection.QuerySingleOrDefault<Member>("SELECT id, personal_number AS PersonalNumber, first_name AS FirstName, last_name AS LastName, address, phone, is_staff AS IsStaff, card_id AS CardId FROM member WHERE personal_number = @PersonalNumber");
+        return db.Connection.QuerySingleOrDefault<Member>("SELECT id, personal_number AS PersonalNumber, first_name AS FirstName, last_name AS LastName, address, phone, is_staff AS IsStaff, card_id AS CardId FROM member WHERE personal_number = @PersonalNumber", paramaters);
     }
 }
