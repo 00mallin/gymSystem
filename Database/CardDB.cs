@@ -19,4 +19,9 @@ public class CardDB
         }
         catch { return 0; }
     }
+
+    public static Card Get(Member member)
+    {
+        return db.Connection.QuerySingleOrDefault<Card>($"SELECT id, activation_date AS ActivationDate FROM `card` WHERE id = {member.CardId}");
+    }
 }
