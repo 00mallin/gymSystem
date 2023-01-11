@@ -10,7 +10,7 @@ public class MembersUI
         Menu subMenu = new();
 
         subMenu.AddMenuItem("New Member", () => NewMember());
-        subMenu.AddMenuItem("Search Member", () => SearchMember());
+        subMenu.AddMenuItem("Search Member", () => SearchMember(gymId));
 
         subMenu.Show();
     }
@@ -38,12 +38,14 @@ public class MembersUI
         
     }
 
-    private static void SearchMember()
+    private static void SearchMember(int gymId)
     {
         Console.Clear();
         Console.Write("Search member by personal number: ");
         string search = Console.ReadLine();
 
         Member result = MemberDB.Get(search);
+
+        MembersSubUI.Show(gymId, result);
     }
 }
