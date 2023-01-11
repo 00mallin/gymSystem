@@ -5,33 +5,23 @@ using Database;
 namespace UI;
 internal class Program
 {
+    public static Menu mainMenu = new();
     private static void Main(string[] args)
     {
-        Member newMember = new();
-        newMember.PersonalNumber = "0009085010";
-        newMember.FirstName = "Malte";
-        newMember.LastName = "Lindh";
-        newMember.Address = "Kinna";
-        newMember.Phone = "076341568";
 
-        Console.WriteLine(MemberDB.Add(newMember));
 
-        Console.ReadLine();
+        Dictionary<Gym, int> listOfGyms = GymDB.GetAll();
 
-        // Menu mainMenu = new();
+        foreach (var gym in listOfGyms)
+        {
+            MenuItem mi = new();
+            mi.Name = $"{gym.Key.Name} ({gym.Value})";
+            mi.Method = () => { GymUI.Show(gym.Key.Id); };
+            mainMenu.AddMenuItem(mi);
+        }
 
-        // List<Gym> listOfGyms = GymDB.GetAll();
+        mainMenu.AddMenuItem("Exit", () => {Environment.Exit(0);});
 
-        // foreach (var gym in listOfGyms)
-        // {
-        //     MenuItem mi = new();
-        //     mi.Name = gym.Name;
-        //     mi.Method = () => { GymUI.Show(gym.Id); };
-        //     mainMenu.AddMenuItem(mi);
-        // }
-
-        // mainMenu.AddMenuItem("Exit", () => {Environment.Exit(0);});
-
-        // mainMenu.Show();       
+        mainMenu.Show("Gymsystem Friskis");       
     }
 }
