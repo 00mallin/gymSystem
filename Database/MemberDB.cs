@@ -45,4 +45,22 @@ public class MemberDB
         var paramaters = new { PersonalNumber = personalNumber};
         return db.Connection.QuerySingleOrDefault<Member>("SELECT id, personal_number AS PersonalNumber, first_name AS FirstName, last_name AS LastName, address, phone, is_staff AS IsStaff, card_id AS CardId FROM member WHERE personal_number = @PersonalNumber", paramaters);
     }
+
+    public static bool Remove(Member member)
+    {
+        List<Membership> memberships = MembershipDB.GetCurrent(member);
+        int result = db.Connection.Execute($"DELETE FROM member WHERE id = {member.Id}; DELETE FROM card WHERE id = {member.CardId}");
+        
+        foreach (var membership in memberships)
+        {
+            MembershipDB.Remove(membership.Id);
+        }
+
+        if (result > 0)
+        {
+            return true;
+        }
+
+        throw new Exception(message: "Couldn't delete member from DB!");
+    }
 }
