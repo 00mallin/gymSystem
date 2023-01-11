@@ -1,11 +1,11 @@
 namespace UI;
 public class GymUI
 {
-    public static void Show(int GymId)
+    public static void Show(int gymId)
     {
         Menu subMenu = new();
 
-        subMenu.AddMenuItem("Members", () => MembersUI.Show());
+        subMenu.AddMenuItem("Members", () => MembersUI.Show(gymId));
         subMenu.AddMenuItem("Equipment", () => EquipmentUI.Show());
 
         subMenu.Show();

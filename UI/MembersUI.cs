@@ -5,7 +5,7 @@ namespace UI;
 
 public class MembersUI
 {
-    public static void Show()
+    public static void Show(int gymId)
     {
         Menu subMenu = new();
 
