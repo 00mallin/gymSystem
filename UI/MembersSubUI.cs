@@ -10,8 +10,8 @@ public class MembersSubUI
         Menu subMenu = new();
 
         subMenu.AddMenuItem("Edit Membership", () => EditMembership(gymId, member));
-        // subMenu.AddMenuItem("Cancel Membership", () => CancelMembership());
-        // subMenu.AddMenuItem("Remove Member", () => RemoveMember());
+        subMenu.AddMenuItem("Cancel Membership", () => CancelMembership(gymId, member));
+        subMenu.AddMenuItem("Remove Member", () => RemoveMember(member));
 
 
         subMenu.Show($"{member.FirstName} {member.LastName}");
@@ -36,6 +36,43 @@ public class MembersSubUI
             Console.Clear();
             Console.Write("Membership succesfully started!...");
             Console.ReadKey();
+        }
+    }
+
+    private static void CancelMembership(int gymId, Member member)
+    {
+        List<Membership> currentMemberships = MembershipDB.GetCurrent(member);
+
+        foreach (var membership in currentMemberships)
+        {
+            if(membership.GymId == gymId)
+            {
+                MembershipDB.Remove(membership.Id);
+            }
+        }
+
+        Console.Clear();
+        Console.Write("Membership has been canceled!...");
+        Console.ReadKey();
+    }
+
+    private static void RemoveMember(Member member)
+    {
+        Console.Clear();
+        Console.WriteLine($"Are you sure you want to remove {member.FirstName} {member.LastName} from the system.");
+        Console.WriteLine("Everything will be removed!");
+        Console.Write("Y/N: ");
+        string answer = Console.ReadLine().ToLower().Trim();
+
+        if(answer == "y")
+        {
+            if(MemberDB.Remove(member))
+            {
+                Console.Clear();
+                Console.Write("Member was permanently deleted from the system...");
+                Console.ReadKey();
+                Program.mainMenu.Show("Gymsystem Friskis");
+            }
         }
     }
 }
