@@ -10,8 +10,7 @@ public class MembersUI
         Menu subMenu = new();
 
         subMenu.AddMenuItem("New Member", () => NewMember());
-        subMenu.AddMenuItem("Update Membership", null);
-        subMenu.AddMenuItem("Delete Member", null);
+        subMenu.AddMenuItem("Search Member", () => SearchMember());
 
         subMenu.Show();
     }
@@ -37,5 +36,14 @@ public class MembersUI
         // Add new card
         // Update memeber with card id
         
+    }
+
+    private static void SearchMember()
+    {
+        Console.Clear();
+        Console.Write("Search member by personal number: ");
+        string search = Console.ReadLine();
+
+        Member result = MemberDB.Get(search);
     }
 }
