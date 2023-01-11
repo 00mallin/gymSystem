@@ -52,6 +52,6 @@ public class MembershipDB
         {
             return true;
         }
-        return false;
+        throw new Exception(message: "Couldn't remove membership from DB!");
     }
 }
