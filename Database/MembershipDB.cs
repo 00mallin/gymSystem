@@ -17,7 +17,7 @@ public class MembershipDB
     {
         Card card = CardDB.Get(member);
         
-        int id = db.Connection.QueryFirstOrDefault<int>($"INSERT INTO membership(start_date, end_date, membership_type_id, gym_id) VALUES ({DateTime.Now.ToString("yyyy-MM-dd")}, {DateTime.Now.AddDays(membershipType.Days).ToString("yyyy-MM-dd")}, {membershipType.Id}, {gymId}); SELECT LAST_INSERT_ID()");
+        int id = db.Connection.QuerySingleOrDefault<int>($"INSERT INTO membership(start_date, end_date, membership_type_id, gym_id) VALUES ('{DateTime.Now.ToString("yyyy-MM-dd")}', '{DateTime.Now.AddDays(membershipType.Days).ToString("yyyy-MM-dd")}', {membershipType.Id}, {gymId}); SELECT LAST_INSERT_ID()");
 
         if (id > 0)
         {
